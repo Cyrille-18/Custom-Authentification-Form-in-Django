@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django| Traitement D'un Formulaire D'authentification</title>
+    <link rel="stylesheet" href="{% static 'Cforms/Css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="row my-4 align-items-center justify-content-center g-3">
+    <div class="col-8 col-lg-4 col-xl-3 mt-5 shadow" >
+        <div class="nav nav-tabs bg-dark rounded-2 " id="nav-tab" role="tablist" >
+            <button class="nav-link active col-6"  id="nav-login" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Connexion</button>
+            <button class="nav-link col-6 "  id="nav-register" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false" >Creer un compte</button>
+        </div>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active py-3" role="tabpanel" aria-labelledby="nav-login" id="login">
+                {% if form.non_field_errors %}
+                <p class="error-message text-center text-danger">{{ form.non_field_errors.0 }}</p>
+                {% endif %}
+                <form class="form-horizontal" method="post" action="{% url 'log' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" name="username" id="username" class="input" placeholder="Nom D'utilisateur">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="password" name="password" id="password" class="input" placeholder="Mot de passe">
+                        </div>
+                    </div>
+                    <div class="row py-3">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-outline-dark" name="connexion" id="connexion">
+                                Se Connecter
+                            </button>
+                            <a class="text-secondary" href="javascript:;">Mot de passe oublié?</a>
+                        </div>
+                    </div>
+                    <div class="row py-2 align-items-center justify-content-center">
+                        <div class="align-items-center justify-content-center text-center d-flex">
+                            <a href="https://www.facebook.com/cyrille.pio.9?mibextid=ZbWKwL" class="text-dark"> <i class="bi bi-facebook mx-2"></i></a>
+                            <a href="https://github.com/Cyrille-18" class="text-dark"> <i class="bi bi-github mx-2"></i></a>
+                            <a href="#" class="text-dark"><i class="bi bi-twitter-x mx-2"></i></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade show py-3" role="tabpanel" aria-labelledby="nav-register" id="register">
+                <form class="form-horizontal" method="post" action="{% url 'signup' %}">
+                    <div class="form-group">
+                        {% csrf_token %}
+                        <div class="col-sm-12">
+                            <input type="text" name="name" id="name" class="input" placeholder="Nom d'utilisateur">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="email" name="email" id="email" class="input" placeholder="Entrer votre email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="password" name="newpassword" id="newpassword" class="input" placeholder="mot de passe">
+                        </div>
+                    </div>
+                    {% if form.confirm.errors %}
+                    <p class="error-message text-center text-danger">{{ form.confirm.errors.0 }}</p>
+                    {% endif %}
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="password" name="confirmpassword" id="confirmpassword" class="input" placeholder="Confirmer votre mot de passe">
+                        </div>
+                        <p class="error-message text-center text-danger" id="Errorpswd"></p>
+                    </div>
+                    <div class="row py-3 mx-2 align-items-center justify-content-center">
+                        <div class="col-sm-12 col-lg-6">
+                            <button type="submit" class="btn btn-outline-dark" name="createaccount" id="createaccount" disabled>
+                                Créer un compte
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row py-1">
+                        <div>
+                            <a href="https://www.facebook.com/cyrille.pio.9?mibextid=ZbWKwL" class="text-dark"> <i class="bi bi-facebook mx-1"></i></a>
+                            <a href="https://github.com/Cyrille-18" class="text-dark"> <i class="bi bi-github mx-1"></i></a>
+                            <a href="#" class="text-dark"><i class="bi bi-twitter-x mx-1"></i></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="{% static 'Cforms/Js/All.js' %}"></script>
+</body>
+</html>

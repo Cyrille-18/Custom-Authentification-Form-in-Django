@@ -1,0 +1,18 @@
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+}
+.input{
+    margin-top: 20px;
+    width: 100%;
+    color: black;
+    height: 35px;
+
+}
+.error-message {
+    color: red;
+    text-align: center;
+}
